@@ -1,1 +1,31 @@
 <h1>Menu</h1>
+<ul class="nav nav-pills">
+  <% Section.all.each do |section|%>
+  <li class="nav-item">
+      <% if params[:section_id] %>
+        <%= link_to section.name, menu_path(section: section.name), 
+        class: "nav-link #{'active' if params[:section_id]==section.id }"%>
+        <%else%>
+        <%= link_to section.name, menu_path(section: section.name), 
+        class: "nav-link #{'active' if params[:section]==section.name }"%>
+      <%end%>
+  </li>
+  <%end%>
+</ul>
+<% if @section%>
+<ul class="list-group">
+    <% @section.food_items.each do |food|%>
+      <li class="list-group-item">
+            <span class="tag tag-default tag-pill  pull-sm-right"><%= food.price %></span>
+            <%= link_to food.name, food_item_path(food.id)%>
+      </li>
+    <%end%>
+<%else%>
+    <% FoodItem.all.each do |food|%>
+      <li class="list-group-item">
+            <span class="tag tag-default tag-pill  pull-sm-right"><%= food.price %></span>
+            <%= link_to food.name, food_item_path(food.id)%>
+      </li>
+      <%end%>
+</ul>
+<%end%>

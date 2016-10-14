@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+      <div class="row">
+          <div class="col-sm-6">
+            <span class="tag tag-default tag-pill  pull-sm-right"><%= @food_item.price %></span>
+            <p>
+              <strong>Name:</strong>
+              <%= @food_item.name %>
+            </p>
+            <p>
+              <strong>Description:</strong>
+              <%= @food_item.description %>
+            </p>
+          </div>
+          <div class="col-sm-6">
+              <div class="card-img">
+                <%= image_tag(@food_item.image_url)%>
+              </div>
+          </div>
+      </div>
+
+<%= link_to 'Edit', edit_food_item_path(@food_item) %> |
+<%= link_to 'Back', menu_path(section_id: @food_item.section_id) %>
