@@ -1,15 +1,28 @@
 class FoodItemsController < ApplicationController
-  before_action :set_food_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_food_item, only: [:show, :edit, :update, :destroy, :search]
 
   # GET /food_items
   # GET /food_items.json
   def index
-    @food_items = FoodItem.all
+    
+    if (params[:search] && params[:search].present?)
+      @food_items = FoodItem.search(params[:search])
+    #elsif (params[:filter] && params[:filter].present?)
+    #@articles = Article.filter(params[:filter])
+    else
+      @food_items = FoodItem.all
+    end
   end
 
+  def searchItem
+    if (params[:food_item_id] && params[:food_item_id].present?)
+      @food_items = FoodItem.searchItem(params[:food_item_id])
+    end
+  end
   # GET /food_items/1
   # GET /food_items/1.json
   def show
+    #@current_order = OrderSum.last
   end
 
   # GET /food_items/new

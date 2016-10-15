@@ -11,6 +11,17 @@
       <%end%>
   </li>
   <%end%>
+  <!-- Dropdown filter -->
+<div class="btn-group">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort Food By
+  </button>
+  <div class="dropdown-menu">
+    <%= link_to 'alphabetical', menu_path(order_by: 0), class:"dropdown-item"%>
+    <%= link_to 'price low to high', menu_path(order_by: 1), class:"dropdown-item"%>
+    <%= link_to 'price high to low', menu_path(order_by: 2), class:"dropdown-item"%>
+  </div>
+</div>
 </ul>
 <% if @section%>
 <ul class="list-group">
@@ -21,11 +32,27 @@
       </li>
     <%end%>
 <%else%>
+  <% if params[:order_by] %>
+    <% if params[:order_by]=='0' %>
+        <% FoodItem.order(:name).all.each do |food|%>
+        <li class="list-group-item"><span class="tag tag-default tag-pill  pull-sm-right"><%= food.price %></span>
+        <%= link_to food.name, food_item_path(food.id)%></li><%end%>
+      <% elsif params[:order_by]=='1' %>
+        <% FoodItem.order(price: :asc).all.each do |food|%>
+        <li class="list-group-item"><span class="tag tag-default tag-pill  pull-sm-right"><%= food.price %></span>
+        <%= link_to food.name, food_item_path(food.id)%></li><%end%>
+      <% elsif params[:order_by]=='2' %>
+        <% FoodItem.order(price: :desc).all.each do |food|%>
+        <li class="list-group-item"><span class="tag tag-default tag-pill  pull-sm-right"><%= food.price %></span>
+        <%= link_to food.name, food_item_path(food.id)%></li><%end%>
+    <%end%>
+  <%else%>
     <% FoodItem.all.each do |food|%>
       <li class="list-group-item">
             <span class="tag tag-default tag-pill  pull-sm-right"><%= food.price %></span>
             <%= link_to food.name, food_item_path(food.id)%>
       </li>
       <%end%>
+  <%end%>
 </ul>
 <%end%>

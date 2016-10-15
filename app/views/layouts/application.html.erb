@@ -20,10 +20,15 @@
       <a class="nav-link" href="#"><%= link_to "Contact Us", contact_us_path%></a>
     </li>
   </ul>
-  <form class="form-inline pull-xs-right">
-    <input class="form-control" type="text" placeholder="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
-  </form>
+  
+    <%= form_tag(food_items_path, :method => 'get',id:"search-form", class:"form-inline pull-xs-right") do %>
+      <%= text_field_tag :search, params[:search], placeholder:"Search", class: "form-control" %>
+      <%= submit_tag "Search", class: "btn btn-outline-success"%>
+    <% end %>
+  
+    
+    
+    
 </nav>
 <div class="container">  
 	  <%= yield %>

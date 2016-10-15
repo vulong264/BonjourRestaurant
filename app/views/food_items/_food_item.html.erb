@@ -1,9 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Food Items</h1>
-
-<% if @food_items.count > 0 %>
-  <ul class="list-group">
+<ul class="list-group">
     <% @food_items.each do |food_item|%>
       <li class="list-group-item">
             <%= link_to food_item.name, food_item_path(food_item.id)%>
@@ -13,9 +8,3 @@
       </li>
       <%end%>
 </ul>
-<%else%>
-  <p>There are no posts with title containing the term(s) <%= params[:search] %></p>
-<%end%>
-<br>
-
-<%= link_to 'New Food Item', new_food_item_path %>
