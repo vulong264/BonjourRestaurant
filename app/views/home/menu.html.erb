@@ -1,4 +1,8 @@
 <h1>Menu</h1>
+<div class="card card-block">
+You have <%= current_order.order_items.size %> item in your orders
+<%= link_to "Check out", checkout_path, class:"btn btn-secondary"%>
+</div>
 <ul class="nav nav-pills">
   <% Section.all.each do |section|%>
   <li class="nav-item">

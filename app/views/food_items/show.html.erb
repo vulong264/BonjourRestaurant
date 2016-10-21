@@ -20,4 +20,16 @@
       </div>
 
 <%= link_to 'Edit', edit_food_item_path(@food_item) %> |
-<%= link_to 'Back', menu_path(section_id: @food_item.section_id) %> |
+<%= link_to 'Back', menu_path(section_id: @food_item.section_id) %> 
+<%= form_for OrderItem.new do |f|%>
+<div class="form-inline">
+<div class="form-group">
+<%= f.label :quantity %>
+<%= f.number_field :quantity, class:"form-controller" %>
+<%= f.hidden_field :food_item_id, value:@food_item.id %>
+</div>
+<div>
+<%= f.submit "Add to order", class: "btn btn_secondary"%>
+</div>
+</div>
+<%end%>
